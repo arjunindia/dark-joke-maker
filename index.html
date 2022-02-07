@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dark Joke Generator</title>
+    <style>
+      body {
+        font-family: "Helvetica Neue", Helvetica, sans-serif;
+        text-align: center;
+      }
+      h1 {
+        font-size: max(5vw, 3rem);
+      }
+      p {
+        font-size: 1.5rem;
+      }
+      button {
+        padding: 1rem;
+      }
+      footer {
+        position: absolute;
+        bottom: 1rem;
+        transform: translateX(50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title"><h1>Dark Joke Generator</h1></div>
+      <hr />
+      <div class="joke">
+        <p class="setup"></p>
+        <p class="delivery"></p>
+      </div>
+      <button onclick="location.reload();">Refresh</button>
+    </div>
+    <footer>
+      <code
+        >ALL OF THESE JOKES ARE NOT MINE, THEY ARE FROM AN ONLINE API
+        <a href="https://sv443.net/jokeapi/v2/">https://sv443.net/jokeapi/v2/</a
+        >. I AM SORRY IF THIS OFFENDED YOU.</code
+      >
+    </footer>
+    <script>
+      const dJA = [];
+      const sP = document.querySelector(".setup");
+      const sD = document.querySelector(".delivery");
+      fetch(`https://v2.jokeapi.dev/joke/Dark`)
+        .then((blob) => blob.json())
+        .then((data) => {
+          if (data.type == "single") {
+            sD.textContent = data.joke;
+          } else {
+            sP.textContent = data.setup;
+            sD.textContent = data.delivery;
+          }
+        });
+      console.log(dJA);
+    </script>
+  </body>
+</html>
